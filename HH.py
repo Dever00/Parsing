@@ -1,4 +1,4 @@
-#Парсинг сайта HH.ru по запросу Python
+#Парсинг сайта HH.ru по запросу Python 
 import requests
 from bs4 import BeautifulSoup
 
