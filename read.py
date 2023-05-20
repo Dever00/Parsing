@@ -1,4 +1,4 @@
-#Чтение созданного CSV файла 
+#Чтение созданного CSV файла
 import pandas as pd
 
 def read_job_csv():
