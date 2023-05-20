@@ -1,3 +1,4 @@
+#Парсинг вакансий Яндекс по запросу Python
 import requests
 from bs4 import BeautifulSoup
 
