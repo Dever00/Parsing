@@ -1,3 +1,4 @@
+#Парсинг сайта HH.ru по запросу Python
 import requests
 from bs4 import BeautifulSoup
 
@@ -9,6 +10,7 @@ headers = {
     'Accept-Encoding' : 'gzip, deflate, br',
     'Connection' : 'keep-alive'}
 
+#Забираем страницы
 def extract_page():
     hh_request = requests.get(URL, headers = headers)
     soup = BeautifulSoup(hh_request.text, 'html.parser')
@@ -19,15 +21,21 @@ def extract_page():
         pages.append(int(page.find('a').text))
     return pages[-1]
 
+#Выгрузка названия должности, компании, место нахождения и ссылка со страниц
 def extract_job_html(html):
+    #Должность
     title = html.find('a').text
+    #Ссылка
     link = html.find('a')['href']
+    #Компания
     company = html.find('div', {'class' : 'vacancy-serp-item__meta-info-company'}).text
     company = company.strip()
+    #Город нахождения
     place = html.find('div', {'data-qa' : 'vacancy-serp__vacancy-address'}).text
     place = place.partition(',')[0]
     return {'title' : title, 'company' : company, 'place' : place, 'link' : link}#
     
+#Создание единого словаря с вакансиями
 def extract_jobs(last_page):
     jobs = []
     for page in range(last_page):
